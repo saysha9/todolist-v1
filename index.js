@@ -47,16 +47,26 @@ app.post("/", function(req, res) {
     if (req.body.list === "Work") {
         workItems.push(item);
         res.redirect("/work");
-    } else {
-        items.push(item);
-        res.redirect("/");
+    } 
+    //to add stuff to the fun list:  note to self, the first "fun" needs to be capitalized!!!!! if not it'll be added to the main list
+    else if (req.body.list === "Fun") {
+      funItems.push(item);
+      res.redirect ("/fun");
     }
+    else (items.push(item)) 
+        res.redirect("/");
 });
 
 
 // display default to do list on the localhost:3000/work route!
 app.get("/work", function(req, res){
     res.render("list", {listTitle: "Work To Do List", newListItems: workItems})
+});
+
+//get fun to shop up as /fun
+app.get ("/fun", function(req,res) {
+  res.render("list", {listTitle: "Fun Stuff!",
+  newListItems: funItems })
 });
 
 app.listen(3000, function() {
